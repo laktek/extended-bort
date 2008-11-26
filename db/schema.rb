@@ -26,14 +26,6 @@ ActiveRecord::Schema.define(:version => 20080929171348) do
     t.string  "salt",       :null => false
   end
 
-  create_table "passwords", :force => true do |t|
-    t.integer  "user_id"
-    t.string   "reset_code"
-    t.datetime "expiration_date"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "roles", :force => true do |t|
     t.string "name"
   end
@@ -54,22 +46,27 @@ ActiveRecord::Schema.define(:version => 20080929171348) do
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
 
   create_table "users", :force => true do |t|
-    t.string   "login",                     :limit => 40
-    t.string   "identity_url"
-    t.string   "name",                      :limit => 100, :default => ""
-    t.string   "email",                     :limit => 100
-    t.string   "crypted_password",          :limit => 40
-    t.string   "salt",                      :limit => 40
-    t.string   "remember_token",            :limit => 40
-    t.string   "activation_code",           :limit => 40
-    t.string   "state",                                    :default => "passive", :null => false
-    t.datetime "remember_token_expires_at"
-    t.datetime "activated_at"
+    t.string   "login",             :limit => 40
+    t.string   "openid_identifier"
+    t.string   "name",              :limit => 100, :default => ""
+    t.string   "email",             :limit => 100, :default => "",        :null => false
+    t.string   "crypted_password",  :limit => 40
+    t.string   "salt",              :limit => 40
+    t.string   "remember_token",    :limit => 40
+    t.string   "perishable_token",                 :default => "",        :null => false
+    t.string   "state",                            :default => "passive", :null => false
     t.datetime "deleted_at"
+    t.integer  "login_count"
+    t.datetime "last_request_at"
+    t.datetime "last_login_at"
+    t.datetime "current_login_at"
+    t.string   "last_login_ip"
+    t.string   "current_login_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "users", ["openid_identifier"], :name => "index_users_on_openid_identifier"
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true
 
 end
