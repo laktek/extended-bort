@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(:version => 20080929171348) do
     t.datetime "updated_at"
   end
 
-  add_index "users", ["openid_identifier"], :name => "index_users_on_openid_identifier"
+  add_index "users", ["openid_identifier"], :name => "index_users_on_openid_identifier", :unique => true
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true
 
 end
