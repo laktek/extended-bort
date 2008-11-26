@@ -43,3 +43,6 @@
 [submodule "vendor/plugins/aasm"]
 	path = vendor/plugins/aasm
 	url = git://github.com/rubyist/aasm.git
+[submodule "vendor/plugins/authlogic"]
+	path = vendor/plugins/authlogic
+	url = git://github.com/binarylogic/authlogic.git
